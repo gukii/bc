@@ -1,0 +1,170 @@
+<video id="player" controls width="400" autoplay></video>
+<button id="capture">Start</button>
+<canvas id="snapshot" width="400" height="225"></canvas>
+<img id="img" width="400" src="barcode.png" height="225"></img>
+<button id="detect">Stop</button>
+<pre id="result" ></pre>More details in Console
+<script>
+  var player = document.getElementById('player');
+  var snapshotCanvas = document.getElementById('snapshot');
+  var captureButton = document.getElementById('capture');
+  var img = document.getElementById('img');
+  var result = document.getElementById('result');
+  var detectButton = document.getElementById('detect');
+  
+  // new global codeReader..
+
+  
+
+  if (window.BarcodeDetector == null) {
+    alert('BarcodeDetector is not defined!')
+  }
+
+  var streamToVideoPlayer = function(stream) {
+    // Attach the video stream to the video element and autoplay.
+    player.srcObject = stream;
+  };
+  
+ 
+  captureButton.addEventListener('click', function() {
+    //var context = snapshotCanvas.getContext('2d');
+    
+
+    
+    if (window.BarcodeDetector == null) {
+    	alert('No BarcodeDetector present, stopping..')
+    	return
+    }
+    
+    let codeReader = new BarcodeDetector()
+  	var context = snapshotCanvas.getContext('2d');
+    
+    
+    // Draw the video frame to the canvas.
+    context.drawImage(player, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+
+    snapshotCanvas.toBlob( blob => {
+      img.src = window.URL.createObjectURL( blob )
+      
+      //  codeReader.detect( img ).then( codes => {
+      codeReader.detect( blob ).then( codes => {
+      
+      	  if (!codes) return
+		  console.log(codes)
+		  
+		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2)
+		  if (txt) result.innerHTML = txt
+		  
+		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox
+			context.beginPath();
+			context.lineWidth = "4";
+			context.strokeStyle = "green";
+			context.rect( bcode.boundingBox[0], bcode.boundingBox[1], bcode.boundingBox[2], bcode.boundingBox[3]);
+			context.stroke();
+		  })
+      })
+    })
+    
+    
+
+  });
+  
+
+/*
+  detectButton.addEventListener('click', () => {
+    if (window.BarcodeDetector == null) {
+      alert('BarcodeDetector is not defined!')
+    }
+
+    //let codeReader = new BarcodeDetector()
+    codeReader.detect(img).then( codes => {
+      console.log(codes)
+      result.innerHTML = JSON.stringify( codes.map( x => x.rawValue), null, 2)
+    })
+  })
+  */
+  
+  // more on getUserMedia: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+
+  navigator.mediaDevices.getUserMedia( {video: { facingMode: "environment" }} )  // was video: true
+      .then( streamToVideoPlayer );
+      
+      /*
+      // turning off video not working yet..
+  detectButton.addEventListener('click', () => {
+  
+    navigator.mediaDevices.getUserMedia( {video: { facingMode: "environment" }} )  // was video: true
+      .then( streamToVideoPlayer );
+      
+      
+	stream.getTracks().forEach(function(track) {
+	  track.stop();
+	});
+	*/
+	
+/*
+barcodeDetector
+  .detect(imageEl)
+  .then((barcodes) => {
+    barcodes.forEach((barcode) => console.log(barcode.rawValue));
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  
+  ////
+  
+  // check compatibility
+	if (!("BarcodeDetector" in window)) {
+	  console.log("Barcode Detector is not supported by this browser.");
+	} else {
+	  console.log("Barcode Detector supported!");
+
+	  // create new detector
+	  const barcodeDetector = new BarcodeDetector({
+		formats: ["code_39", "codabar", "ean_13"],
+	  });
+	}
+
+*/
+
+/*
+
+barcodeDetector
+  .detect(imageEl)
+  .then((barcodes) => {
+    barcodes.forEach((barcode) => console.log(barcode.rawValue));
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  
+  
+  
+  // python example: https://stackoverflow.com/questions/50497945/how-to-reliably-detect-a-barcodes-4-corners
+*/
+
+
+/*
+
+navigator.mediaDevices.getUserMedia({audio:true,video:true})
+    .then(stream => {
+        window.localStream = stream;
+    })
+    .catch( (err) =>{
+        console.log(err);
+    });
+// later you can do below
+// stop both video and audio
+localStream.getTracks().forEach( (track) => {
+track.stop();
+});
+// stop only audio
+localStream.getAudioTracks()[0].stop();
+// stop only video
+localStream.getVideoTracks()[0].stop();
+
+*/
+      
+     
+</script>

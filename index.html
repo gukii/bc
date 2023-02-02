@@ -28,7 +28,6 @@
  
   captureButton.addEventListener('click', function() {
     //var context = snapshotCanvas.getContext('2d');
-    
 
     
     if (window.BarcodeDetector == null) {
@@ -55,6 +54,7 @@
 		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2)
 		  if (txt) result.innerHTML = txt
 		  
+		  /*
 		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox
 			context.beginPath();
 			context.lineWidth = "4";
@@ -62,6 +62,7 @@
 			context.rect( bcode.boundingBox[0], bcode.boundingBox[1], bcode.boundingBox[2], bcode.boundingBox[3]);
 			context.stroke();
 		  })
+		  */
       })
     })
     

@@ -28,6 +28,8 @@
  
   captureButton.addEventListener('click', function() {
     //var context = snapshotCanvas.getContext('2d');
+    
+    result.innerHTML = "testing.."
 
     
     if (window.BarcodeDetector == null) {
@@ -71,7 +73,7 @@
   });
   
 
-/*
+
   detectButton.addEventListener('click', () => {
     if (window.BarcodeDetector == null) {
       alert('BarcodeDetector is not defined!')
@@ -83,7 +85,7 @@
       result.innerHTML = JSON.stringify( codes.map( x => x.rawValue), null, 2)
     })
   })
-  */
+  
   
   // more on getUserMedia: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 

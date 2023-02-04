@@ -1,8 +1,8 @@
 <video id="player" controls width="400" autoplay></video>
-<button id="capture">Start</button>
+<button id="capture">Detect 1</button>
 <canvas id="snapshot" width="400" height="225"></canvas>
 <img id="img" width="400" src="barcode.png" height="225"></img>
-<button id="detect">Stop</button>
+<button id="detect">Detect 2</button>
 <pre id="result" ></pre>More details in Console
 <script>
   var player = document.getElementById('player');
@@ -20,7 +20,7 @@
     alert('BarcodeDetector is not defined!')
   }
 
-  var streamToVideoPlayer = function(stream) {
+  const streamToVideoPlayer = function(stream) {
     // Attach the video stream to the video element and autoplay.
     player.srcObject = stream;
   };

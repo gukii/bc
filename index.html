@@ -47,6 +47,10 @@
 		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2);
 		  if (txt) writeStatus( result, "codes: " + txt);  //result.innerHTML = txt;
 		  
+		  const bbtxt = JSON.stringify( codes.map( x => x.boundingBox), null, 2);
+		  if (bbtxt) writeStatus( result, "bb: " + bbtxt);  //result.innerHTML = txt;
+
+		  
 		  /*
 		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox
 			context.beginPath();

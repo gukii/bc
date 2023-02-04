@@ -25,35 +25,37 @@
 	img.onload = function () {
 	   //alert("image is loaded");
 	   
-	   result.innerHTML = "";
+
 	   
       //  codeReader.detect( img ).then( codes => {
       codeReader.detect( img ).then( codes => {
+      
+      	  result.innerHTML = "";
       
       	  //result.innerHTML = "inside codeReader.detect.."
       	  writeStatus( result, "inside codeReader.detect..");
       
       	  if (!codes) {
-      	  	writeStatus( result, "no codes..");
+      	  	//writeStatus( result, "no codes..");
       	  	return;
       	  }
       	  
-      	  writeStatus( result, "got codes..");
-		  console.log(codes);
+      	  
+      	  
+      	  //writeStatus( result, "got codes..");
+		  //console.log(codes);
 		  
-		  //result.innerHTML = "inside codeReader.detect, got codes.."
-		  //writeStatus( result, "inside codeReader.detect, got codes..")
 		  
 		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2);
 		  if (txt) writeStatus( result, "codes: " + txt);  //result.innerHTML = txt;
 		  
-		  const bbtxt = JSON.stringify( codes.map( x => x.boundingBox), null, 2);
-		  if (bbtxt) writeStatus( result, "bb: " + bbtxt);  //result.innerHTML = txt;
+		  //const bbtxt = JSON.stringify( codes.map( x => x.boundingBox), null, 2);
+		  //if (bbtxt) writeStatus( result, "bb: " + bbtxt);  //result.innerHTML = txt;
 
-		  const cptxt = JSON.stringify( codes.map( x => x.cornerPoints), null, 2);
-		  if (cptxt) writeStatus( result, "cp: " + cptxt);  //result.innerHTML = txt;
+		  //const cptxt = JSON.stringify( codes.map( x => x.cornerPoints), null, 2);
+		  //if (cptxt) writeStatus( result, "cp: " + cptxt);  //result.innerHTML = txt;
 		  
-		  // cornerPoints: [ { x, y }, { x, y }, { x, y }, { x, y }, ]  
+
 		  
 		  
 		  
@@ -109,7 +111,6 @@
     }
     
 
-    
     
     // Draw the video frame to the canvas.
     context.drawImage(player, 0, 0, snapshotCanvas.width, snapshotCanvas.height);

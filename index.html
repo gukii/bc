@@ -69,11 +69,11 @@
 			context.beginPath();
 			context.lineWidth = "3";
 			context.strokeStyle = "yellow";
-			ctx.moveTo(bcode.cornerPoints[0]["x"], bcode.cornerPoints[0]["y"]);
-			ctx.lineTo(bcode.cornerPoints[1]["x"], bcode.cornerPoints[1]["y"]);
-			ctx.lineTo(bcode.cornerPoints[2]["x"], bcode.cornerPoints[2]["y"]);
-			ctx.lineTo(bcode.cornerPoints[3]["x"], bcode.cornerPoints[3]["y"]);
-			ctx.lineTo(bcode.cornerPoints[0]["x"], bcode.cornerPoints[0]["y"]);
+			context.moveTo(bcode.cornerPoints[0]["x"], bcode.cornerPoints[0]["y"]);
+			context.lineTo(bcode.cornerPoints[1]["x"], bcode.cornerPoints[1]["y"]);
+			context.lineTo(bcode.cornerPoints[2]["x"], bcode.cornerPoints[2]["y"]);
+			context.lineTo(bcode.cornerPoints[3]["x"], bcode.cornerPoints[3]["y"]);
+			context.lineTo(bcode.cornerPoints[0]["x"], bcode.cornerPoints[0]["y"]);
 			context.stroke();
 		  })
 		  

@@ -1,5 +1,5 @@
 <video id="player" controls width="400" autoplay></video>
-<button id="capture">Detect 1</button>
+<button id="capture">Detect 1.</button>
 <canvas id="snapshot" width="400" height="225"></canvas>
 <img id="img" width="400" src="barcode.png" height="225"></img>
 <button id="detect">Detect 2</button>
@@ -13,6 +13,12 @@
   var detectButton = document.getElementById('detect');
   
   // new global codeReader..
+  
+  
+  const writeStatus = function( node, txt ) {
+  
+  	node.appendChild( document.createTextNode( txt ) ); 
+  }
 
   
 
@@ -29,36 +35,41 @@
   captureButton.addEventListener('click', function() {
     //var context = snapshotCanvas.getContext('2d');
     
-    result.innerHTML = "testing.."
+    //result.innerHTML = "testing.."
+    writeStatus( result, "captureButton pressed ");
 
     
     if (window.BarcodeDetector == null) {
-    	alert('No BarcodeDetector present, stopping..')
+    	alert('No BarcodeDetector present, stopping..');
     	return
     }
     
-    let codeReader = new BarcodeDetector()
+    let codeReader = new BarcodeDetector();
   	var context = snapshotCanvas.getContext('2d');
     
     
     // Draw the video frame to the canvas.
     context.drawImage(player, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+    
+    writeStatus( result, "captureButton before snapshotCanvas.toBlob.. ");
 
     snapshotCanvas.toBlob( blob => {
-      img.src = window.URL.createObjectURL( blob )
+      img.src = window.URL.createObjectURL( blob );
       
       //  codeReader.detect( img ).then( codes => {
       codeReader.detect( blob ).then( codes => {
       
-      	  result.innerHTML = "inside codeReader.detect.."
+      	  //result.innerHTML = "inside codeReader.detect.."
+      	  writeStatus( result, "inside codeReader.detect..");
       
       	  if (!codes) return
-		  console.log(codes)
+		  console.log(codes);
 		  
-		  result.innerHTML = "inside codeReader.detect, got codes.."
+		  //result.innerHTML = "inside codeReader.detect, got codes.."
+		  writeStatus( result, "inside codeReader.detect, got codes..")
 		  
-		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2)
-		  if (txt) result.innerHTML = txt
+		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2);
+		  if (txt) result.innerHTML = txt;
 		  
 		  /*
 		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox

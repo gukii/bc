@@ -18,22 +18,27 @@
   
   
 	img.onload = function () {
-	   alert("image is loaded");
+	   //alert("image is loaded");
 	   
       //  codeReader.detect( img ).then( codes => {
-      codeReader.detect( blob ).then( codes => {
+      codeReader.detect( img ).then( codes => {
       
       	  //result.innerHTML = "inside codeReader.detect.."
       	  writeStatus( result, "inside codeReader.detect..");
       
-      	  if (!codes) return
+      	  if (!codes) {
+      	  	writeStatus( result, "no codes..");
+      	  	return;
+      	  }
+      	  
+      	  writeStatus( result, "got codes..");
 		  console.log(codes);
 		  
 		  //result.innerHTML = "inside codeReader.detect, got codes.."
 		  //writeStatus( result, "inside codeReader.detect, got codes..")
 		  
 		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2);
-		  if (txt) writeStatus( result, "got codes: " + txt);  //result.innerHTML = txt;
+		  if (txt) writeStatus( result, "codes: " + txt);  //result.innerHTML = txt;
 		  
 		  /*
 		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox

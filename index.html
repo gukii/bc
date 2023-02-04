@@ -50,16 +50,19 @@
 		  const bbtxt = JSON.stringify( codes.map( x => x.boundingBox), null, 2);
 		  if (bbtxt) writeStatus( result, "bb: " + bbtxt);  //result.innerHTML = txt;
 
+		  const cptxt = JSON.stringify( codes.map( x => x.cornerPoints), null, 2);
+		  if (cptxt) writeStatus( result, "bb: " + cptxt);  //result.innerHTML = txt;
 		  
-		  /*
+		  
+		  
 		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox
 			context.beginPath();
 			context.lineWidth = "4";
 			context.strokeStyle = "green";
-			context.rect( bcode.boundingBox[0], bcode.boundingBox[1], bcode.boundingBox[2], bcode.boundingBox[3]);
+			context.rect( bcode.boundingBox.left, bcode.boundingBox.top, bcode.boundingBox.right, bcode.boundingBox.bottom);
 			context.stroke();
 		  })
-		  */
+		  
       })
 	}
   

@@ -16,9 +16,16 @@
   let codeReader = new BarcodeDetector();
   var context = snapshotCanvas.getContext('2d');
   
+  const writeStatus = function( node, txt ) {
+  
+  	node.appendChild( document.createTextNode( txt + ".." ) ); 
+  }
+  
   
 	img.onload = function () {
 	   //alert("image is loaded");
+	   
+	   result.innerHTML = "";
 	   
       //  codeReader.detect( img ).then( codes => {
       codeReader.detect( img ).then( codes => {
@@ -52,10 +59,7 @@
       })
 	}
   
-  const writeStatus = function( node, txt ) {
-  
-  	node.appendChild( document.createTextNode( txt + ".." ) ); 
-  }
+
 
   
 

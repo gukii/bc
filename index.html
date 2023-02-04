@@ -51,7 +51,7 @@
 		  if (bbtxt) writeStatus( result, "bb: " + bbtxt);  //result.innerHTML = txt;
 
 		  const cptxt = JSON.stringify( codes.map( x => x.cornerPoints), null, 2);
-		  if (cptxt) writeStatus( result, "bb: " + cptxt);  //result.innerHTML = txt;
+		  if (cptxt) writeStatus( result, "cp: " + cptxt);  //result.innerHTML = txt;
 		  
 		  // cornerPoints: [ { x, y }, { x, y }, { x, y }, { x, y }, ]  
 		  
@@ -69,11 +69,11 @@
 			context.beginPath();
 			context.lineWidth = "3";
 			context.strokeStyle = "yellow";
-			ctx.moveTo(bcode.cornerPoints[0].x, bcode.cornerPoints[0].y);
-			ctx.lineTo(bcode.cornerPoints[1].x, bcode.cornerPoints[1].y);
-			ctx.lineTo(bcode.cornerPoints[2].x, bcode.cornerPoints[2].y);
-			ctx.lineTo(bcode.cornerPoints[3].x, bcode.cornerPoints[3].y);
-			ctx.lineTo(bcode.cornerPoints[0].x, bcode.cornerPoints[0].y);
+			ctx.moveTo(bcode.cornerPoints[0]["x"], bcode.cornerPoints[0]["y"]);
+			ctx.lineTo(bcode.cornerPoints[1]["x"], bcode.cornerPoints[1]["y"]);
+			ctx.lineTo(bcode.cornerPoints[2]["x"], bcode.cornerPoints[2]["y"]);
+			ctx.lineTo(bcode.cornerPoints[3]["x"], bcode.cornerPoints[3]["y"]);
+			ctx.lineTo(bcode.cornerPoints[0]["x"], bcode.cornerPoints[0]["y"]);
 			context.stroke();
 		  })
 		  

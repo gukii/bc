@@ -53,15 +53,19 @@
 		  const cptxt = JSON.stringify( codes.map( x => x.cornerPoints), null, 2);
 		  if (cptxt) writeStatus( result, "bb: " + cptxt);  //result.innerHTML = txt;
 		  
+		  // cornerPoints: [ { x, y }, { x, y }, { x, y }, { x, y }, ]  
+		  
 		  
 		  
 		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox
 			context.beginPath();
 			context.lineWidth = "4";
 			context.strokeStyle = "green";
-			context.rect( bcode.boundingBox.left, bcode.boundingBox.top, bcode.boundingBox.right, bcode.boundingBox.bottom);
+			context.rect( bcode.boundingBox.left, bcode.boundingBox.top, bcode.boundingBox.width, bcode.boundingBox.height);
 			context.stroke();
 		  })
+		  
+		  
 		  
       })
 	}

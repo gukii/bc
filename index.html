@@ -13,7 +13,39 @@
   var detectButton = document.getElementById('detect');
   
   // new global codeReader..
+  let codeReader = new BarcodeDetector();
+  var context = snapshotCanvas.getContext('2d');
   
+  
+	img.onload = function () {
+	   alert("image is loaded");
+	   
+      //  codeReader.detect( img ).then( codes => {
+      codeReader.detect( blob ).then( codes => {
+      
+      	  //result.innerHTML = "inside codeReader.detect.."
+      	  writeStatus( result, "inside codeReader.detect..");
+      
+      	  if (!codes) return
+		  console.log(codes);
+		  
+		  //result.innerHTML = "inside codeReader.detect, got codes.."
+		  //writeStatus( result, "inside codeReader.detect, got codes..")
+		  
+		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2);
+		  if (txt) writeStatus( result, "got codes: " + txt);  //result.innerHTML = txt;
+		  
+		  /*
+		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox
+			context.beginPath();
+			context.lineWidth = "4";
+			context.strokeStyle = "green";
+			context.rect( bcode.boundingBox[0], bcode.boundingBox[1], bcode.boundingBox[2], bcode.boundingBox[3]);
+			context.stroke();
+		  })
+		  */
+      })
+	}
   
   const writeStatus = function( node, txt ) {
   
@@ -44,8 +76,7 @@
     	return
     }
     
-    let codeReader = new BarcodeDetector();
-  	var context = snapshotCanvas.getContext('2d');
+
     
     
     // Draw the video frame to the canvas.
@@ -56,31 +87,6 @@
     snapshotCanvas.toBlob( blob => {
       img.src = window.URL.createObjectURL( blob );
       
-      //  codeReader.detect( img ).then( codes => {
-      codeReader.detect( blob ).then( codes => {
-      
-      	  //result.innerHTML = "inside codeReader.detect.."
-      	  writeStatus( result, "inside codeReader.detect..");
-      
-      	  //if (!codes) return
-		  //console.log(codes);
-		  
-		  //result.innerHTML = "inside codeReader.detect, got codes.."
-		  //writeStatus( result, "inside codeReader.detect, got codes..")
-		  
-		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2);
-		  if (txt) writeStatus( result, "got codes: " + txt);  //result.innerHTML = txt;
-		  
-		  /*
-		  codes.forEach( bcode => {  // .cornerPoints  // .boundingBox
-			context.beginPath();
-			context.lineWidth = "4";
-			context.strokeStyle = "green";
-			context.rect( bcode.boundingBox[0], bcode.boundingBox[1], bcode.boundingBox[2], bcode.boundingBox[3]);
-			context.stroke();
-		  })
-		  */
-      })
     })
     
     

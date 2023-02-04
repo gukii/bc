@@ -50,8 +50,12 @@
       //  codeReader.detect( img ).then( codes => {
       codeReader.detect( blob ).then( codes => {
       
+      	  result.innerHTML = "inside codeReader.detect.."
+      
       	  if (!codes) return
 		  console.log(codes)
+		  
+		  result.innerHTML = "inside codeReader.detect, got codes.."
 		  
 		  const txt = JSON.stringify( codes.map( x => x.rawValue), null, 2)
 		  if (txt) result.innerHTML = txt
